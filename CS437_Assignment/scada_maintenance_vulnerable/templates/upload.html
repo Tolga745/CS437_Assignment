@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Upload</h2>
+<p>Unrestricted upload page (CWE-434). No file type checks.</p>
+<form method="post" enctype="multipart/form-data" class="mb-3">
+  <div class="input-group">
+    <input type="file" class="form-control" name="file" />
+    <button class="btn btn-primary" type="submit">Upload</button>
+  </div>
+</form>
+
+<h3>Uploaded Files</h3>
+<ul>
+  {% for u in uploads %}
+    <li>
+      <a href="/uploads/{{ u.filename }}" target="_blank">{{ u.filename }}</a>
+      <small class="text-muted">({{ u.uploaded_at }})</small>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

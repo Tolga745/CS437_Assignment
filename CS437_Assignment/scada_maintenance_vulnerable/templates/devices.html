@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Devices</h2>
+<p>Manage maintenance mode and lockout/tagout for devices.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Online</th><th>Maintenance</th><th>Lockout/Tagout</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in devices %}
+    <tr>
+      <td>{{ d.id }}</td>
+      <td>{{ d.name }}</td>
+      <td>{{ 'Yes' if d.online else 'No' }}</td>
+      <td>{{ 'On' if d.maintenance_mode else 'Off' }}</td>
+      <td>{{ 'On' if d.lockout_tagout else 'Off' }}</td>
+      <td>
+        <form method="post" class="d-inline">
+          <input type="hidden" name="device_id" value="{{ d.id }}" />
+          <button class="btn btn-sm btn-warning" name="action" value="maintenance_on">Maintenance On</button>
+          <button class="btn btn-sm btn-secondary" name="action" value="maintenance_off">Maintenance Off</button>
+          <button class="btn btn-sm btn-danger" name="action" value="lockout_on">Lockout</button>
+          <button class="btn btn-sm btn-success" name="action" value="lockout_off">Unlock</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if include_vulnerable_jquery %}
+<!-- CWE-1395: Using vulnerable third-party component jQuery 1.12.4 (CVE-2019-11358) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+  // Minimal usage just to demonstrate dependency presence
+  $(function(){ console.log('Legacy jQuery loaded (vulnerable).'); });
+</script>
+{% endif %}
+{% endblock %}

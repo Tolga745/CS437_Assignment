@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-4">
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">Assets Online</h5>
+				<p class="card-text display-6">{{ status.assets_online }}</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">Assets Offline</h5>
+				<p class="card-text display-6">{{ status.assets_offline }}</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">Open Tickets</h5>
+				<p class="card-text display-6">{{ status.open_tickets }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="alert alert-info" role="alert">
+	This is placeholder data. We'll connect real backend data next.
+	</div>
+{% endblock %}
+

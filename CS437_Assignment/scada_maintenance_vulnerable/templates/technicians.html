@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Technicians</h2>
+<p>Assign technicians to devices to record access.</p>
+
+<form method="post" class="row g-3">
+  <div class="col-md-4">
+    <label class="form-label">Technician</label>
+    <select class="form-select" name="tech_id" required>
+      {% for t in techs %}
+      <option value="{{ t.id }}">{{ t.name }} (assigned: {{ t.assigned_device_id or 'none' }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Device</label>
+    <select class="form-select" name="device_id">
+      <option value="">(none)</option>
+      {% for d in devices %}
+      <option value="{{ d.id }}">{{ d.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4 align-self-end">
+    <button class="btn btn-primary">Assign</button>
+  </div>
+</form>
+
+<h3 class="mt-4">Technicians</h3>
+<table class="table table-striped">
+  <thead><tr><th>ID</th><th>Name</th><th>Assigned Device</th></tr></thead>
+  <tbody>
+    {% for t in techs %}
+    <tr>
+      <td>{{ t.id }}</td>
+      <td>{{ t.name }}</td>
+      <td>{{ t.assigned_device_id or 'none' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
